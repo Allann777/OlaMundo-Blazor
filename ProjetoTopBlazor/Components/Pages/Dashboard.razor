@@ -1,0 +1,44 @@
+@page "/dashboard"
+
+<h1>Dashboard 🚀</h1>
+
+<div style="padding:20px; border-radius:10px; background:#f5f5f5;">
+    <h3>Contador</h3>
+    <button @onclick="Incrementar">Clique: @contador</button>
+</div>
+
+<br>
+
+<div style="padding:20px; border-radius:10px; background:#e3f2fd;">
+    <h3>Lista de Tarefas</h3>
+
+    <input @bind="novaTarefa" placeholder="Digite uma tarefa" />
+    <button @onclick="Adicionar">Adicionar</button>
+
+    <ul>
+        @foreach (var tarefa in tarefas)
+        {
+            <li>@tarefa</li>
+        }
+    </ul>
+</div>
+
+@code {
+    int contador = 0;
+    string novaTarefa = "";
+    List<string> tarefas = new();
+
+    void Incrementar()
+    {
+        contador++;
+    }
+
+    void Adicionar()
+    {
+        if (!string.IsNullOrWhiteSpace(novaTarefa))
+        {
+            tarefas.Add(novaTarefa);
+            novaTarefa = "";
+        }
+    }
+}
